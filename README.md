@@ -1,6 +1,6 @@
 windows-adb-remote
 ==================
-A simple console application which allows to connect via adb to an android device and send via "adb input keyevents <id>" different inputs.
+A simple console application which allows to connect via adb to an android device and send via "adb input keyevents /<id/>" different inputs.
 
 Keys that are mapped:
 Enter -> Enter/Select
