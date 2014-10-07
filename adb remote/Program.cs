@@ -9,15 +9,17 @@ namespace adb_remote
 {
     class Program
     {
-        static string IPAddress = "192.168.178.60";
-
+        private static string IPAddress;
         static void Main(string[] args)
         {
-            if (IPAddress == string.Empty)
+            Console.WriteLine("Welcome.");
+
+            while (string.IsNullOrEmpty(IPAddress))
             {
-                Console.Write("Welcome.\r\nPlease enter the IP Address of the ADB Device: ");
+                Console.Write("Please enter the IP Address of the ADB Device: ");
                 IPAddress = Console.ReadLine();
             }
+
             adbCommand("kill-server");
             adbCommand("start-server");
             adbCommand("connect " + IPAddress);
@@ -49,10 +51,9 @@ namespace adb_remote
                         break;
                 }
             }
-
         }
 
-        static void adbCommand(string adbCommand)
+        private static void adbCommand(string adbCommand)
         {
             var p = new Process();
             p.StartInfo = new ProcessStartInfo("adb", adbCommand)
@@ -61,10 +62,9 @@ namespace adb_remote
             };
             p.Start();
             p.WaitForExit();
-
         }
 
-        static void PrintMainMenu()
+        private static void PrintMainMenu()
         {
             Console.WriteLine("Connected to: " + IPAddress);
             Console.WriteLine("--------------------------------");
@@ -73,10 +73,10 @@ namespace adb_remote
             Console.WriteLine("3) Exit");
         }
 
-        static void ADBMode()
+        private static void ADBMode()
         {
             Console.Clear();
-            Console.WriteLine("ADB Mode (F5 for Mainmenu)");
+            Console.WriteLine("ADB Mode (Press F5 for Menu)");
 
             bool getOut = false;
             while (!getOut)
@@ -95,10 +95,10 @@ namespace adb_remote
             }
         }
 
-        static void RemoteControlMode()
+        private static void RemoteControlMode()
         {
             Console.Clear();
-            Console.WriteLine("Remote Control Mode (F5 for Mainmenu)");
+            Console.WriteLine("Remote Control Mode (Press F5 for Menu)");
 
             bool getOut = false;
             while (!getOut)
@@ -128,155 +128,117 @@ namespace adb_remote
                     case ConsoleKey.Enter:
                         adbCommand("shell input keyevent 66");
                         break;
-
                     case ConsoleKey.A:
                         adbCommand("shell input keyevent 29");
                         break;
-
                     case ConsoleKey.B:
                         adbCommand("shell input keyevent 30");
                         break;
-
                     case ConsoleKey.C:
                         adbCommand("shell input keyevent 31");
                         break;
-
                     case ConsoleKey.D:
                         adbCommand("shell input keyevent 32");
                         break;
-
                     case ConsoleKey.E:
                         adbCommand("shell input keyevent 33");
                         break;
-
                     case ConsoleKey.F:
                         adbCommand("shell input keyevent 34");
                         break;
-
                     case ConsoleKey.G:
                         adbCommand("shell input keyevent 35");
                         break;
-
                     case ConsoleKey.H:
                         adbCommand("shell input keyevent 36");
                         break;
-
                     case ConsoleKey.I:
                         adbCommand("shell input keyevent 37");
                         break;
-
                     case ConsoleKey.J:
                         adbCommand("shell input keyevent 38");
                         break;
-
                     case ConsoleKey.K:
                         adbCommand("shell input keyevent 39");
                         break;
-
                     case ConsoleKey.L:
                         adbCommand("shell input keyevent 40");
                         break;
-
                     case ConsoleKey.M:
                         adbCommand("shell input keyevent 41");
                         break;
-
                     case ConsoleKey.N:
                         adbCommand("shell input keyevent 42");
                         break;
-
                     case ConsoleKey.O:
                         adbCommand("shell input keyevent 43");
                         break;
-
                     case ConsoleKey.P:
                         adbCommand("shell input keyevent 44");
                         break;
-
                     case ConsoleKey.Q:
                         adbCommand("shell input keyevent 45");
                         break;
-
                     case ConsoleKey.R:
                         adbCommand("shell input keyevent 46");
                         break;
-
                     case ConsoleKey.S:
                         adbCommand("shell input keyevent 47");
                         break;
-
                     case ConsoleKey.T:
                         adbCommand("shell input keyevent 48");
                         break;
-
                     case ConsoleKey.U:
                         adbCommand("shell input keyevent 49");
                         break;
-
                     case ConsoleKey.V:
                         adbCommand("shell input keyevent 50");
                         break;
-
                     case ConsoleKey.W:
                         adbCommand("shell input keyevent 51");
                         break;
-
                     case ConsoleKey.X:
                         adbCommand("shell input keyevent 52");
                         break;
-
                     case ConsoleKey.Y:
                         adbCommand("shell input keyevent 53");
                         break;
-
                     case ConsoleKey.Z:
                         adbCommand("shell input keyevent 54");
                         break;
-
                     case ConsoleKey.D0:
                         adbCommand("shell input keyevent 7");
                         break;
-
                     case ConsoleKey.D1:
                         adbCommand("shell input keyevent 8");
                         break;
-
                     case ConsoleKey.D2:
                         adbCommand("shell input keyevent 9");
                         break;
-
                     case ConsoleKey.D3:
                         adbCommand("shell input keyevent 10");
                         break;
-
                     case ConsoleKey.D4:
                         adbCommand("shell input keyevent 11");
                         break;
-
                     case ConsoleKey.D5:
                         adbCommand("shell input keyevent 12");
                         break;
-
                     case ConsoleKey.D6:
                         adbCommand("shell input keyevent 13");
                         break;
-
                     case ConsoleKey.D7:
                         adbCommand("shell input keyevent 14");
                         break;
-
                     case ConsoleKey.D8:
                         adbCommand("shell input keyevent 15");
                         break;
-
                     case ConsoleKey.D9:
                         adbCommand("shell input keyevent 16");
                         break;
-
                     case ConsoleKey.OemPeriod:
                         adbCommand("shell input keyevent 56");
                         break;
-
                     case ConsoleKey.OemComma:
                         adbCommand("shell input keyevent 55");
                         break;
@@ -287,7 +249,7 @@ namespace adb_remote
             }
         }
 
-        static void ExitApplication()
+        private static void ExitApplication()
         {
             adbCommand("disconnect");
             adbCommand("kill-server");
